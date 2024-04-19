@@ -1,8 +1,10 @@
 'use client';
 
-import { useTheme } from '@mui/material/styles';
+import Link from 'next/link';
 
-import { Chip, Typography } from '@mui/material';
+import { Button, Box, ButtonBase, Chip, Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { skills } from '@/app/lib/definitions';
@@ -14,43 +16,46 @@ export default function Skills() {
 	return (
 		<Section
 			description={
-				"My current favorite tech stack utilizes the NextJS framework to stream React components from the server. In some applications, data fetching from the server can circumvent the traditional HTTP request-response cycle entirely. For me, this pattern, coupled with Next's new App router, neatly integrate the full-stack experience."
+				'My current (and favorite) tech stack utilizes the NextJS framework to stream React components from the server. In some applications, data fetching in this way can circumvent the traditional HTTP request-response cycle entirely. I find this pattern neatly integrates the full-stack development experience.'
 			}
 			id={'skills'}
-			title={'Languages, Libraries, Skills, & Technologies'}
+			title={'Libraries, Skills, & Technologies'}
 		>
 			<Grid container spacing={1}>
 				{skills.map(skill => {
 					return (
 						<Grid key={skill.name} xs={6} sm={4} lg={3}>
-							<Chip
-								clickable={true}
-								component={'a'}
+							<ButtonBase
+								component={Link}
 								href={skill.href}
-								icon={skill.icon}
 								key={skill.name}
-								label={
-									<Typography
-										sx={{
-											overflow: 'hidden',
-											textOverflow: 'ellipsis',
-										}}
-										variant={'body1'}
-									>
-										{skill.name}
-									</Typography>
-								}
 								sx={{
+									alignItems: 'center',
+									border: `1px solid ${grey[500]}`,
+									borderRadius: theme.shape.borderRadius,
+									display: 'flex',
+									height: '3rem',
 									paddingX: theme.spacing(1),
-									paddingY: theme.spacing(3),
 									width: '100%',
-									'& .MuiChip-label': {
-										marginLeft: theme.spacing(0.5),
+									'&:hover': {
+										backgroundColor: `${grey[100]}`,
+									},
+									'&:hover, &:not(:hover)': {
+										transition: 'background-color 300ms ease',
 									},
 								}}
 								target={'_blank'}
-								variant={'outlined'}
-							/>
+							>
+								<Box
+									sx={{
+										marginRight: theme.spacing(1),
+										marginTop: theme.spacing(0.5),
+									}}
+								>
+									{skill.icon}
+								</Box>
+								{skill.name}
+							</ButtonBase>
 						</Grid>
 					);
 				})}

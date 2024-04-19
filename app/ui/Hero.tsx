@@ -1,45 +1,32 @@
 'use client';
 
-import { MailOutline } from '@mui/icons-material';
-import { Avatar, Box, Button, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { GitHubIcon } from '@/app/lib/icons';
-import { Section } from '@/app/ui/index';
+import { ContactButtons, Section } from '@/app/ui/index';
 
 export default function Hero() {
 	const theme = useTheme();
 
 	return (
 		<Section id={'hero'}>
-			<Typography variant={'h4'}>Adrian MacKenzie</Typography>
+			<Typography variant={'h4'}>Adrian David MacKenzie</Typography>
 			<Typography variant={'body1'}>
-				I combine my experience in product and brand to solve problems,
-				tell stories, and create compelling experiences.
+				{/* I combine my experience in product and brand to solve problems, tell
+				stories, and create compelling experiences. */}
+				<Box component={'span'} sx={{ color: 'red' }}>
+					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt,
+					autem.
+				</Box>
 			</Typography>
 
-			<Box
-				sx={{
-					marginTop: theme.spacing(4),
-				}}
-			>
-				<Button
-					startIcon={<MailOutline sx={{ color: '#000' }} />}
-					sx={{ marginRight: theme.spacing(1) }}
-					variant={'outlined'}
-				>
-					Email
-				</Button>
-				<Button startIcon={<GitHubIcon />} variant={'outlined'}>
-					Github
-				</Button>
-			</Box>
+			<ContactButtons />
 
 			<Box
 				sx={{
 					alignItems: 'center',
 					display: 'flex',
-					marginTop: theme.spacing(4),
+					marginTop: theme.spacing(2),
 				}}
 			>
 				<Avatar
@@ -50,8 +37,13 @@ export default function Hero() {
 				<Box sx={{ marginLeft: theme.spacing(2) }}>
 					<Typography variant={'h5'}>Nice to meet you!</Typography>
 					<Typography variant={'subtitle1'}>
-						I&apos;m Adrian, a graphic and type designer focused on
-						identity, typography, and interaction design.
+						I&apos;m Adrian, a full-stack web developer with 5+ years experience
+						creating responsive and accessible web applications.
+						<Box component={'span'} sx={{ color: 'red' }}>
+							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae
+							cum molestiae asperiores quam, accusantium voluptate inventore ad
+							incidunt nostrum qui!
+						</Box>
 					</Typography>
 				</Box>
 			</Box>

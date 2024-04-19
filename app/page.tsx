@@ -1,10 +1,11 @@
 import { Box, Container } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
-import { About, Header, Hero, Skills, Work } from '@/app/ui/index';
+import { Contact, Footer, Header, Hero, Skills, Work } from '@/app/ui/index';
 
 export default function Home() {
 	return (
-		<Box sx={{ marginX: 'auto' }}>
+		<Box id={'top'} sx={{ backgroundColor: `${grey[50]}`, marginX: 'auto' }}>
 			<Header />
 
 			<Container component={'main'} maxWidth={'lg'}>
@@ -14,8 +15,10 @@ export default function Home() {
 
 				<Skills />
 
-				<About />
+				<Contact />
 			</Container>
+
+			<Footer />
 		</Box>
 	);
 }

@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react';
 
+import { grey } from '@mui/material/colors';
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -31,13 +32,15 @@ export default function Section({
 	const theme = useTheme();
 
 	return (
-		<Box component={'section'} id={id} sx={{ marginTop: theme.spacing(8) }}>
+		<Box
+			component={'section'}
+			id={id}
+			sx={{ color: `${grey[900]}`, marginTop: theme.spacing(8) }}
+		>
 			{/* Render section header */}
 			<Box maxWidth={headWidth} sx={{ marginX: 'auto' }}>
 				<Typography variant={'h5'}>{title}</Typography>
-				<Typography sx={{ textWrap: 'pretty' }} variant={'body1'}>
-					{description}
-				</Typography>
+				<Typography variant={'body1'}>{description}</Typography>
 			</Box>
 
 			{/* Render section body */}

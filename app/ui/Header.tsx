@@ -22,7 +22,7 @@ import { grey } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 
 export default function Header() {
-	const sections = ['Work', 'Skills', 'About', 'Contact'];
+	const sections = ['Work', 'Skills', 'Contact'];
 
 	// Create media query for small mobile viewports
 	const theme = useTheme();
@@ -40,7 +40,7 @@ export default function Header() {
 			elevation={trigger ? 4 : 0}
 			sx={{
 				// Display border only when at the top of the page
-				borderBottom: `${!trigger && `1px solid ${grey[200]}`}`,
+				borderBottom: trigger ? 'none' : `1px solid ${grey[300]}`,
 				backdropFilter: 'blur(5px)',
 				backgroundColor: 'transparent',
 				position: 'sticky',
@@ -48,13 +48,16 @@ export default function Header() {
 		>
 			<Box maxWidth={'lg'} sx={{ width: '100%', marginX: 'auto' }}>
 				<Toolbar
-					sx={{ display: 'flex', justifyContent: 'space-between' }}
+					sx={{
+						display: 'flex',
+						justifyContent: 'space-between',
+					}}
 				>
 					<LocationWidget />
 
 					{/* Render mobile nav for mobile viewports */}
 					{mobileVP ? (
-						<MobileNav sections={sections} theme={theme} />
+						<MobileNav sections={sections} />
 					) : (
 						<DefaultNav sections={sections} />
 					)}
@@ -66,31 +69,35 @@ export default function Header() {
 
 interface NavProps {
 	sections: string[];
-	theme?: any;
 }
 
 const DefaultNav = ({ sections }: NavProps) => {
+	const theme = useTheme();
+
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				justifyContent: 'space-around',
-			}}
-		>
+		<Box>
 			{sections.map(section => {
 				return (
-					<Button
+					<ButtonBase
 						component={Link}
 						href={`#${section.toLowerCase()}`}
 						key={section}
 						sx={{
+							color: grey[900],
+							fontSize: theme.typography.h6,
+							height: '4rem',
+							padding: theme.spacing(1),
+							paddingBottom: 0,
 							textDecoration: 'none',
 							textTransform: 'initial',
+							'&:hover': { backgroundColor: grey[100] },
+							'&:hover, &:not(:hover)': {
+								transition: 'background-color 300ms ease',
+							},
 						}}
-						variant={'text'}
 					>
-						<Typography variant={'h6'}>{section}</Typography>
-					</Button>
+						{section}
+					</ButtonBase>
 				);
 			})}
 		</Box>
@@ -134,10 +141,13 @@ const MobileNav = ({ sections }: NavProps) => {
 					backgroundColor: `${bgColor}`,
 					display: 'flex',
 					flexDirection: 'column',
+					// height: '4rem',
 					marginTop: theme.spacing(2),
 					paddingX: theme.spacing(1),
+					// paddingY: theme.spacing(2),
 					position: 'absolute',
 					right: 0,
+					'&:hover': { backgroundColor: open ? '#fff' : grey[100] },
 				}}
 			>
 				<Typography variant={'h6'}>Jump to...</Typography>
@@ -151,9 +161,7 @@ const MobileNav = ({ sections }: NavProps) => {
 									href={`#${section.toLowerCase()}`}
 									key={section}
 								>
-									<Typography variant={'subtitle1'}>
-										{section}
-									</Typography>
+									<Typography variant={'subtitle1'}>{section}</Typography>
 								</ListItem>
 							);
 						})}
@@ -187,7 +195,7 @@ const LocationWidget = () => {
 		<LocationOnOutlined
 			sx={{
 				fontSize: '1rem',
-				marginRight: theme.spacing(0.5),
+				marginRight: theme.spacing(0.25),
 			}}
 		/>
 	);
@@ -200,6 +208,7 @@ const LocationWidget = () => {
 			variant={'subtitle2'}
 		>
 			<Box sx={{ alignItems: 'end', display: 'flex' }}>
+				{/* Use hidden icon to indent the top text */}
 				<Box sx={{ color: 'transparent' }}>
 					<LocationIcon />
 				</Box>
@@ -213,7 +222,7 @@ const LocationWidget = () => {
 				})}
 			</Box>
 
-			<Box sx={{ alignItems: 'center', display: 'flex' }}>
+			<Box sx={{ alignItems: 'start', display: 'flex' }}>
 				<LocationIcon />
 				{myLocation}
 			</Box>

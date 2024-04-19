@@ -1,5 +1,6 @@
 * {
 	margin: 0;
 	scroll-behavior: smooth;
-	/* scroll-margin-top: 4rem; */
+	/* Offset the height of the sticky nav bar */
+	scroll-margin-top: 6rem;
 }
